@@ -4,7 +4,12 @@ import { Link } from "react-router-dom";
 
 export default function NavbarComponent() {
   return (
-    <Navbar bg="primary" data-bs-theme="dark">
+    <Navbar
+      expand="lg"
+      className="bg-body-tertiary"
+      bg="dark"
+      data-bs-theme="dark"
+    >
       <Container>
         <Navbar.Brand as={Link} to={"/posts"}>
           Blog App
