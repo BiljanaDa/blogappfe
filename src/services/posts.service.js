@@ -6,18 +6,18 @@ export default class PostService extends HttpService {
       method: "GET",
       url: "/posts",
       params: {
-        perPage:8, page
-      }
+        perPage: 8,
+        page,
+      },
     });
-    return {data:response?.data,
-    metadata:response?.metadata};
+    return { data: response?.data, metadata: response?.metadata };
   }
+
   static async getSingle(id) {
-    const response= await this.request({
+    const response = await this.request({
       method: "GET",
       url: `/posts/${id}`,
     });
-    return response?.data
+    return response?.data;
   }
-  
 }
