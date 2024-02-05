@@ -20,4 +20,13 @@ export default class PostService extends HttpService {
     });
     return response?.data;
   }
-}
+
+  static async create(data) {
+    const response = await this.request({
+      method: "POST",
+      url: `/posts/`,
+      data,
+    });
+    return response?.data;
+  }
+} 
