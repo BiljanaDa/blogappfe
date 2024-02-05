@@ -32,3 +32,4 @@ export default function usePosts(page = 1) {
     setMetadata,
   };
 }
+

@@ -18,6 +18,9 @@ export default function NavbarComponent() {
           <Nav.Link as={Link} className="btn btn-light" to="/posts">
             Posts
           </Nav.Link>
+          <Nav.Link as={Link} className="btn btn-light" to="/createpost">
+            Create Post
+          </Nav.Link>
         </Nav>
       </Container>
     </Navbar>

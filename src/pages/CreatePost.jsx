@@ -3,7 +3,10 @@ import { Alert, Container } from "react-bootstrap";
  import Button from 'react-bootstrap/Button';
         import Form from 'react-bootstrap/Form';
 import PostService from "../services/posts.service";
+const defaultData = {title: "", body: "",image:""}
+
 export default function CreatePost() {
+    const [message, setMessage] = useState("")
     const[formData, setFormData] = useState({
         title:"", body:'', image:''})
     const[errors, setErrors] = useState({
@@ -13,8 +16,13 @@ export default function CreatePost() {
         // if(formData.title.length===0 || formData.body===0)
         // return alert ("Title and body must be specified");
         try{
+            setErrors(defaultData);
             const response = await PostService.create(formData);
             console.log(response);
+            if(response) {
+                setFormData(defaultData);
+                setMessage("Post created successfully")
+            }
         }
         catch(e) {
             const _errors = e?.response?.data?.errors;
@@ -51,6 +59,9 @@ export default function CreatePost() {
           <Form.Control type="text" placeholder="Image url"  value={formData.image} onChange={(e)=>setFormData({...formData, image:e.target.value})}/>
           {errors.image&& <Alert variant="danger">{errors.image}</Alert>} 
         </Form.Group>
+        {message && (
+            <Alert variant="success" >{message}</Alert>
+        )}
         <Button variant="primary" type="button" onClick={onSubmit}>
           Create Post
         </Button>
