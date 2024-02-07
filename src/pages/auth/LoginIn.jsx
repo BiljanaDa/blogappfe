@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Alert, Container } from "react-bootstrap";
  import Button from 'react-bootstrap/Button';
         import Form from 'react-bootstrap/Form';
+import { useNavigate } from "react-router";
 import AuthService from "../../services/auth.service";
 
 const defaultData = {email: "",password:""}
@@ -10,6 +11,7 @@ export default function Login() {
     const [message, setMessage] = useState("")
     const[formData, setFormData] = useState(defaultData)
     const[errors, setErrors] = useState(defaultData)
+    const navigate = useNavigate();
     async function onSubmit() {
         // if(formData.title.length===0 || formData.body===0)
         // return alert ("Title and body must be specified");
@@ -19,7 +21,10 @@ export default function Login() {
             console.log(response);
             if(response) {
                 setFormData(defaultData);
-                setMessage("")
+                setMessage(response.message);
+                localStorage.setItem('user', JSON.stringify(response.user));
+                localStorage.setItem('token', response.token);
+                navigate("/posts")
             }
         }
         catch(e) {
@@ -59,7 +64,7 @@ export default function Login() {
             <Alert variant="success" >{message}</Alert>
         )}
         <Button variant="primary" type="button" onClick={onSubmit}>
-          Register
+          Login
         </Button>
       </Form>
       </Container>

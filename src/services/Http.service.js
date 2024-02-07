@@ -13,7 +13,10 @@ export default class HttpService {
       method,
       url,
       data,
-      params
+      params, 
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token")
+      }
     });
     {
       // const response = await this.client.request({ method, url, data });
